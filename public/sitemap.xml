@@ -2,43 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/projects/project_maglev_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_maglev_f/</loc>
     <lastmod>2023-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_adc_highspeed_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_adc_highspeed_f/</loc>
     <lastmod>2025-09-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_buck_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_buck_f/</loc>
     <lastmod>2025-05-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_nixie_clock_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_nixie_clock_f/</loc>
     <lastmod>2024-11-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_linefollow_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_linefollow_f/</loc>
     <lastmod>2021-06-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_boostled_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_boostled_f/</loc>
     <lastmod>2021-05-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_linear_motor_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_linear_motor_f/</loc>
     <lastmod>2019-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_kapitsa_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_kapitsa_f/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_ddr_pad_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_ddr_pad_f/</loc>
     <lastmod>2025-05-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/</loc>
-    <lastmod>2025-09-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/project_injection_molded_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_injection_molded_f/</loc>
     <lastmod>2022-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project_clicky_box_f/</loc>
+    <loc>http://localhost:1313/posts/projects/project_clicky_box_f/</loc>
     <lastmod>2021-05-15T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/projects/</loc>
+    <lastmod>2025-09-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/</loc>
+    <lastmod>2025-09-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-09-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/about-me/</loc>

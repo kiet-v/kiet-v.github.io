@@ -2,7 +2,7 @@
 author: "Kiet Vu"
 title: "★ Op-amp based line following robot"
 date: "2021-06-02"
-description: "what if we are not using a microcontroller?"
+description: "'What if we are not using a microcontroller?'"
 FRtags: ["markdown", "css", "html", "themes"]
 FRcategories: ["themes", "syntax"]
 FRseries: ["Themes Guide"]

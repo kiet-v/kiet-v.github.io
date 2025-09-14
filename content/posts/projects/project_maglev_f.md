@@ -1,6 +1,6 @@
 ---
 author: "Kiet Vu"
-title: "★ Magnetic Levitation Device (Thesis Work)"
+title: "★ Magnetic Levitation Device"
 date: "2023-06-01"
 description: "MIT MechE Bachelor Thesis"
 FRtags: ["markdown", "css", "html", "themes"]
@@ -38,6 +38,6 @@ This project implements analog control. In hindsight I might have saved more tim
 
 ## Thesis Document 
 The complete document can be found here:
-<embed src="/pdfs/vu-kietv-sb-meche-2023-thesis.pdf" type="application/pdf" width="100%" height="525px" />
+<embed src="/pdfs/vu-kietv-sb-meche-2023-thesis.pdf" type="application/pdf" width="100%" height="600px" />
 
 

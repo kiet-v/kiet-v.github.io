@@ -2,7 +2,7 @@
 author: "Kiet Vu"
 title: "★ Nixie Tube Display"
 date: "2024-11-03"
-description: "Building a nixie number randomizer"
+description: "Building a Nixie Tube display (Random Number Generator)"
 FRtags: ["markdown", "css", "html", "themes"]
 FRcategories: ["themes", "syntax"]
 FRseries: ["Themes Guide"]
@@ -26,11 +26,11 @@ You can find more information in the following sections, which include the schem
 
 # Schematics and PCBs
 - Nixie Supply Board Schematic & Layout
-<embed src="/images/nixie/Schematic_Nixie-Driver-v1.pdf" type="application/pdf" width="100%" height="500px" />
+<embed src="/images/nixie/Schematic_Nixie-Driver-v1.pdf" type="application/pdf" width="100%" height="600px" />
 <embed src="/images/nixie/pwrboard_2d.png" width="100%"/>
 <embed src="/images/nixie/pwrboard_3d.png" width="100%"/>
 - Nixie S/R Board Schematic
-<embed src="/images/nixie/Schematic_Nixie-SR-V1.pdf" type="application/pdf" width="100%" height="500px" />
+<embed src="/images/nixie/Schematic_Nixie-SR-V1.pdf" type="application/pdf" width="100%" height="600px" />
 <embed src="/images/nixie/sr_board_2d.png" width="100%" />
 
 # Prototype Testing
@@ -38,9 +38,9 @@ Number cycling test (integration test of shift register and power supply)
 <iframe src="https://www.dropbox.com/scl/fi/nlr2nv6076aqqs3yn0a2e/NixiePrototype.MOV?rlkey=bidid1dwio8k0830phsx8nluj&st=6wumedts&raw=1" height="480px" width="640px" allowfullscreen></iframe>
 
 # Gallery 
-<embed src="/images/nixie/nixie-front.png" width="95%"/>
-<embed src="/images/nixie/nixie-side.png" width="95%"/>
-<embed src="/images/nixie/nixie-top.png" width="95%"/>
+<embed src="/images/nixie/nixie-front.png" width="100%"/>
+<embed src="/images/nixie/nixie-side.png" width="100%"/>
+<embed src="/images/nixie/nixie-top.png" width="100%"/>
 
 # Code Logic 
 ```c
