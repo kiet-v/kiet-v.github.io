@@ -60,8 +60,6 @@ Store each digit separatedly
 every 60000 milliseconds: 
 bit shift HV 1 every cycle:
 bit shift HV 2 if HV 1 is zero 
-
-
 */ 
 
 void setup() {
@@ -81,7 +79,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   unsigned long now = millis();
   
-  // Check if the interval has passed
+  // check if the interval has passed...
   if (now - last >= interval) {
     for (int index = 0; index < random(5,60); index++){
       random_update_sequence(false);
@@ -207,13 +205,11 @@ uint32_t convert_array_to_digit(uint32_t time_array[]){
     }
 
 uint32_t reverse_bits(uint32_t value) {
-    uint32_t reversed = 0;  // Store the result
+    uint32_t reversed = 0; 
 
     for (uint8_t i = 0; i < 32; ++i) {
-        // Extract the rightmost bit from value
         uint32_t bit = (value >> i) & 1;
-        
-        // Set this bit in the reversed number at the correct position
+  
         reversed |= (bit << (32 - i - 1));
     }
 
@@ -225,7 +221,7 @@ void random_update_sequence(bool multi_digit){
   write_to_sr_uint32(reverse_bits(value_to_SR));
   set_latch_up(); // latch down is when the data is shifted!
   delayMicroseconds(10); 
-  set_latch_down(); //turn the shift register!
+  set_latch_down(); // turn the shift register!
 }
 ```
 
