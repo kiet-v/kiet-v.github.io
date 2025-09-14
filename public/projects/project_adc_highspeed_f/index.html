@@ -242,7 +242,7 @@
 <ul>
 <li>I decided to use the AD9219 from ADI, which is a 65 MHz, 10 bits ADC. Its sampling rates, resolution and LVDS outputs are similar to what I need. Another reason is this IC is a part of a family of IC (AD9228&hellip;) that is pin-compatible. This board is built with such upgrade in mind - I should only need to replace the clock and the ADC with its pin compatible version. This IC also has an optional SPI line that allows me to program the IC with FPGA, but still works if I don&rsquo;t use it (which is a nice risk reduction)</li>
 <li>The LVDS outputs are shown below. There&rsquo;s a PLL inside the IC that takes in the input clock (CLK) and generate output clock (FCO) that scales by number of resolution bits (meaning if I have 40 MHz clock, I will get 40 x 10 MHz since my IC is 10 bits). Output data line is sampled on both rising and falling edge of the output clock signal.
-<embed src="/images/adc/LVDSProtocol.png" width="100%"/></li>
+<embed src="/images/adc/LVDSProtocol.png" width="90%"/></li>
 </ul>
 <h2 id="front-end-and-adc-driver">Front-End and ADC Driver<a hidden class="anchor" aria-hidden="true" href="#front-end-and-adc-driver">#</a></h2>
 <ul>
@@ -256,7 +256,7 @@
 <h2 id="clock-selection">Clock Selection:<a hidden class="anchor" aria-hidden="true" href="#clock-selection">#</a></h2>
 <ul>
 <li>High speed ADC System requires a clean clock signal. The requirement becomes more stringent as you go to higher sampling frequency and resolution (see AN-501 application notes from ADI, the image below is taken from Figure 5):
-<embed src="/images/adc/SNRJitter.png" width="100%"/></li>
+<embed src="/images/adc/SNRJitter.png" width="90%"/></li>
 <li>I select a clock (LMK6C from TI) which has 500fs maximum RMS jitter at 100MHz (12kHz to 20MHz integration BW).</li>
 <li>RF Transformer is used to convert single ended clock signal to differential, with a pair of high speed schottsky diode being placed to limit input voltage.</li>
 </ul>
@@ -291,10 +291,10 @@
 <h2 id="schematics-and-stackup">Schematics and Stackup<a hidden class="anchor" aria-hidden="true" href="#schematics-and-stackup">#</a></h2>
 <ul>
 <li>Schematic:
-<embed src="/images/adc/ADC_LVDS_Testboard.pdf" type="application/pdf" width="100%" height="600px" />
+<embed src="/images/adc/ADC_LVDS_Testboard.pdf" type="application/pdf" width="100%" height="525px" />
 <br></br></li>
 <li>Stack up:
-<embed src="/images/adc/Stackup.pdf" type="application/pdf" width="100%" height="600px" /></li>
+<embed src="/images/adc/Stackup.pdf" type="application/pdf" width="100%" height="525px" /></li>
 </ul>
 
 
@@ -303,7 +303,6 @@
   <footer class="post-footer">
     <ul class="post-tags">
     </ul>
-
   </footer>
 </article>
     </main>

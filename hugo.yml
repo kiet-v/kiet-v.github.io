@@ -61,7 +61,7 @@ params:
   ShowReadingTime: false
   # disableSpecial1stPost: true
   displayFullLangName: false
-  ShowPostNavLinks: true
+  ShowPostNavLinks: false
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: false
   ShowRssButtonInSectionTermList: true
