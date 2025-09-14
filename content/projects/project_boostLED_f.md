@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 2
+weight: 6
 ---
 This is a small project where I want to power a blue LED (which has Vf~ 3V @ 10mA) with a 1.5V AA Battery by building a boost converter using discrete components. 
 

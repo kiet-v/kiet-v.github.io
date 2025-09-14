@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 4
+weight: 5
 ---
 
 Every semester, MIT 2.678 (Electronics for Mechanical System I, and a class in which I was being a learning assitant) holds a competition every year where students built line-following robot that traverses a pre-defined course. During our lab session, there's a discussion with Steve Banzaert (the technical instructor of the course) and my fellow LAs/TAs : what if we don't have a microcontroller? That conversation then subsequently leads to the creation of this project. I built this robot over the course of 2-3 weeks, during the time of the competition. 

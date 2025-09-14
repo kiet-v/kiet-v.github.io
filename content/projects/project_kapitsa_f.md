@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 12
+weight: 8
 ---
 
 This is a project for MIT 2.671 (Instrument and Measurement) - a class about observing and measuring physical variables, such as force, strain, temperature, flow rate, etc. As a part of this class, we get to pick our own topic of interests for measurement, as long as you have a way to measure it. 

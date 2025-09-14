@@ -11,16 +11,8 @@
     </image>
     <generator>Hugo -- 0.149.0</generator>
     <language>en-us</language>
-    <copyright>[Kiet D. Vu]</copyright>
     <lastBuildDate>Sun, 14 Sep 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>★ 50 - 150W Buck Converter Paper Design</title>
-      <link>http://localhost:1313/projects/project_buck_f/</link>
-      <pubDate>Thu, 15 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/project_buck_f/</guid>
-      <description>Power Electronics (MIT 6.334) Final Design Project</description>
-    </item>
     <item>
       <title>★ Magnetic Levitation Device (Thesis Work)</title>
       <link>http://localhost:1313/projects/project_maglev_f/</link>
@@ -36,39 +28,11 @@
       <description>Thought process going into designing 65 MHz ADC Board Prototype</description>
     </item>
     <item>
-      <title>Injection-Molded Yoyo</title>
-      <link>http://localhost:1313/projects/project_injection_molded_f/</link>
-      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/project_injection_molded_f/</guid>
-      <description>Making injection-molded yoyo from scratch</description>
-    </item>
-    <item>
-      <title>Dimmable Blue LED from AA battery</title>
-      <link>http://localhost:1313/projects/project_boostled_f/</link>
-      <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/project_boostled_f/</guid>
-      <description>Driving blue LED from a 1.5V AA battery</description>
-    </item>
-    <item>
-      <title>Useless Box</title>
-      <link>http://localhost:1313/projects/project_clicky_box_f/</link>
-      <pubDate>Sat, 15 May 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/project_clicky_box_f/</guid>
-      <description>A useless, interactive box</description>
-    </item>
-    <item>
-      <title>DDR Pad</title>
-      <link>http://localhost:1313/projects/project_ddr_pad_f/</link>
-      <pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/project_ddr_pad_f/</guid>
-      <description>Making a light-weight DDR Pad</description>
-    </item>
-    <item>
-      <title>★ Op-amp based line following robot</title>
-      <link>http://localhost:1313/projects/project_linefollow_f/</link>
-      <pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/project_linefollow_f/</guid>
-      <description>what if we are not using a microcontroller?</description>
+      <title>★ 50 - 150W Buck Converter Paper Design</title>
+      <link>http://localhost:1313/projects/project_buck_f/</link>
+      <pubDate>Thu, 15 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_buck_f/</guid>
+      <description>Power Electronics (MIT 6.334) Final Design Project</description>
     </item>
     <item>
       <title>★ Nixie Tube Display</title>
@@ -78,11 +42,18 @@
       <description>Building a nixie number randomizer</description>
     </item>
     <item>
-      <title>Kapitza&#39;s Pendulum</title>
-      <link>http://localhost:1313/projects/project_kapitsa_f/</link>
-      <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/project_kapitsa_f/</guid>
-      <description>Unusual, and fascinating way to balance an unstable system</description>
+      <title>★ Op-amp based line following robot</title>
+      <link>http://localhost:1313/projects/project_linefollow_f/</link>
+      <pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_linefollow_f/</guid>
+      <description>what if we are not using a microcontroller?</description>
+    </item>
+    <item>
+      <title>Dimmable Blue LED from AA battery</title>
+      <link>http://localhost:1313/projects/project_boostled_f/</link>
+      <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_boostled_f/</guid>
+      <description>Driving blue LED from a 1.5V AA battery</description>
     </item>
     <item>
       <title>★ Linear Motor</title>
@@ -90,6 +61,34 @@
       <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/projects/project_linear_motor_f/</guid>
       <description>Linear Motor - MIT 6.A01 Freshman Seminar Project</description>
+    </item>
+    <item>
+      <title>Kapitza&#39;s Pendulum</title>
+      <link>http://localhost:1313/projects/project_kapitsa_f/</link>
+      <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_kapitsa_f/</guid>
+      <description>Unusual, and fascinating way to balance an unstable system</description>
+    </item>
+    <item>
+      <title>DDR Pad</title>
+      <link>http://localhost:1313/projects/project_ddr_pad_f/</link>
+      <pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_ddr_pad_f/</guid>
+      <description>Making a light-weight DDR Pad</description>
+    </item>
+    <item>
+      <title>Injection-Molded Yoyo</title>
+      <link>http://localhost:1313/projects/project_injection_molded_f/</link>
+      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_injection_molded_f/</guid>
+      <description>Making injection-molded yoyo from scratch</description>
+    </item>
+    <item>
+      <title>Useless Box</title>
+      <link>http://localhost:1313/projects/project_clicky_box_f/</link>
+      <pubDate>Sat, 15 May 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_clicky_box_f/</guid>
+      <description>A useless, interactive box</description>
     </item>
     <item>
       <title>About Me</title>

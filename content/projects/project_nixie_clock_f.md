@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 5
+weight: 4
 ---
 <iframe width="800" height="480" src="https://www.youtube.com/embed/IyNu2J0NiTc?si=-T2R4KzOZgVSdeNV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

@@ -61,7 +61,7 @@ params:
   ShowReadingTime: false
   # disableSpecial1stPost: true
   displayFullLangName: false
-  ShowPostNavLinks: false
+  ShowPostNavLinks: true
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: false
   ShowRssButtonInSectionTermList: true
@@ -92,7 +92,9 @@ params:
       <br/><br/>
       If you are interested in taking a look, you can find them in the Projects and Publications sections. 
       <br/><br/>
-      Happy to have you here! -Kiet 
+      Happy to have you here! -Kiet
+      <br/><br/>
+      (Notes: I recommend using desktop device when viewing this website)
 
 
   assets:

@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 3
+weight: 9
 ---
 
 One of my favorite rhythm games is DDR/ITG - it's quite hard to beat a combo of good soundtracks, engaging gameplay, and actually getting some considerable workout. At the time, MIT machine (yes MIT does have a DDR machine, and yes it is amazing) unfortunately broke down, so that leaves me on a DDR drought. So gives me an excuse to try to build my own DDR pad... My plan is to build a DDR pad that is quick to put together, and convenient to use.  

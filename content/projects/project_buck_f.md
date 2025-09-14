@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 1
+weight: 3
 ---
 
 (Complete work is included in the ["Details"](#details) section below)

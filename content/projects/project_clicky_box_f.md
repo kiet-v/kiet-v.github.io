@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 2
+weight: 11
 ---
 I got an inspiration while strolling through [Youtube](https://www.youtube.com/watch?v=oVzYjx63iQM), and I want to make one myself... so I put together some spare components that I have and 3D printed an enclosure structure to test it out. The motors being used are [plastic motors](https://www.pololu.com/product/1520) from Pololu. Here's the prototype. 
 

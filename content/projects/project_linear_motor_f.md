@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 15
+weight: 7
 ---
 This is a project that I made for 6.A01. It's an MIT Freshman Seminar where we get to spend time building a project at MIT makerspace where we got introduced to digital fabrication tools (3D printer and laser cutter). 
 

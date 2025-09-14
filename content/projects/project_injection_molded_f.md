@@ -9,7 +9,7 @@ FRseries: ["Themes Guide"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true
-weight: 2
+weight: 10
 ---
 As a part of MIT 2.008 (Design and Manufacturing), we learn about manufacturing processes, and considerations (cost, reliability, quality, rate) when doing manufacturing at-scale. Toward this goal, the big part of this class is to design and manufacture our own yoyo. For this project, we went through a process of designing the metal mold, thermoforming parts and actually injection-molding our own yoyos. 
 <br></br>
