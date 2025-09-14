@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>★ Nixie Tube Display | Kiet D. Vu</title>
+<meta name="keywords" content="">
+<meta name="description" content="Building a nixie number randomizer">
+<meta name="author" content="Kiet Vu">
+<link rel="canonical" href="http://localhost:1313/projects/project_nixie_clock/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.402df69d910c9e59d7975ce917b0827809b79c4e2768bae3d49b5b14f77832bc.css" integrity="sha256-QC32nZEMnlnXl1zpF7CCeAm3nE4naLrj1JtbFPd4Mrw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en-us" href="http://localhost:1313/projects/project_nixie_clock/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/projects/project_nixie_clock/">
+  <meta property="og:site_name" content="Kiet D. Vu">
+  <meta property="og:title" content="★ Nixie Tube Display">
+  <meta property="og:description" content="Building a nixie number randomizer">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="projects">
+    <meta property="article:published_time" content="2024-11-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-03T00:00:00+00:00">
+      <meta property="og:image" content="http://localhost:1313/images/papermod-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/images/papermod-cover.png">
+<meta name="twitter:title" content="★ Nixie Tube Display">
+<meta name="twitter:description" content="Building a nixie number randomizer">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Projects",
+      "item": "http://localhost:1313/projects/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "★ Nixie Tube Display",
+      "item": "http://localhost:1313/projects/project_nixie_clock/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "★ Nixie Tube Display",
+  "name": "★ Nixie Tube Display",
+  "description": "Building a nixie number randomizer",
+  "keywords": [
+    
+  ],
+  "articleBody": "\rDesign Musings I have known about nixie tubes for a while, and it is great to finally make something with them myself! I went to Ebay and bought a couple of IN-12 tubes (there are larger variants such as IN-14 \u0026 IN-18, I happen to like the design of this one due to its compactness). I was planning to make a clock, but ended up making something slightly different for this iteration.\nThis project into two separated parts: The shift register/control circuit and the high voltage boost converter. For IN-12 tube, the supply requirement is ~165VDC, ~5mA per tube. The voltage supply is a normal DC wall plug (12V, 1A). I set up my converter to be able to deliver up to 25 mA of current, which is sufficient to power all the tubes.\nFor shift register circuit, I use HV5622 which is a high voltage serial-to-parallel converter that can support up to 230V output. The shift register is controlled by an Arduino Nano (through a 5-12 V level shifter).\nThis is also my first project trying to use EasyEDA \u0026 JLCPCB assembly capability. I think it’s usable and that the integrated library is certainly very convenient.\nYou can find more information in the following sections, which include the schematics, code and test.\nSchematics and PCBs Nixie Supply Board Schematic \u0026 Layout Nixie S/R Board Schematic \u0026 Layout Prototype Testing Number cycling test (integration test of shift register and power supply)\nGallery Code Logic #define PIN_DATAIN_MASK (1 \u003c\u003c 6) // D7 #define PIN_CLOCK_MASK (1 \u003c\u003c 7) // D6 #define PIN_LATCH_MASK (1 \u003c\u003c 5) // D5 /* Position: Arrangement: -\u003e [1,2,3...9,0] HV1 - HV10: IN1: minute smol -\u003e [1,2,3...9,0] HV11 - HV20: IN2: minute big -\u003e [1,2,3...9,0] HV21 - HV30: IN3: hours smol -\u003e [1,2,3...9,0] HV31 - HV32: IN4: hours large - \u003e[1,2] Strat: Store each digit separatedly every 60000 milliseconds: bit shift HV 1 every cycle: bit shift HV 2 if HV 1 is zero */ void setup() { DDRD = DDRD | B11111100; delay(350); } uint32_t time_array[4] = {0b01, 0b0000001000, 0b0000000001, 0b0000000001}; unsigned long interval = 1000; unsigned long interval_min = 5000; unsigned long interval_max = 180000; unsigned long last = 0; bool need_time_update = true; uint32_t value_to_SR = 1; void loop() { // put your main code here, to run repeatedly: unsigned long now = millis(); // Check if the interval has passed if (now - last \u003e= interval) { for (int index = 0; index \u003c random(5,60); index++){ random_update_sequence(false); delay(40); } randomSeed(analogRead(A4)); random_update_sequence(false); last = now; interval = random(interval_min, interval_max); } } void write_to_sr_uint32(uint32_t value) { // set value, clock up and down, then change value and repeat uint32_t shifted_val = value; for (int i = 0; i\u003c=31; i++){ PORTD |= PIN_CLOCK_MASK; //set clock high delayMicroseconds(2); bool bit_val = ((shifted_val \u0026 1) == 1); if (bit_val == true) { PORTD |= PIN_DATAIN_MASK; // set the datain line to HIGH } else { PORTD \u0026= (~PIN_DATAIN_MASK); // set the datain line to LOW } delayMicroseconds(2); PORTD \u0026= (~PIN_CLOCK_MASK); //set clocl low. data stored. delayMicroseconds(2); shifted_val = shifted_val \u003e\u003e 1; //shift for the next round } } void set_latch_up(){ PORTD |= PIN_LATCH_MASK; } void set_latch_down(){ PORTD \u0026= (~PIN_LATCH_MASK); } uint32_t update_time_value(uint32_t time_array[], size_t size){ uint32_t time_array_old[size] = {time_array}; uint32_t zero_bit_location = 1 \u003c\u003c 9; // uint32_t one_bit_location = 0b01; //location of digit 1 time_array[3] \u003c\u003c= 1; // always shift this bit if (time_array[3] == (1 \u003c\u003c 10)){ time_array[3] = one_bit_location; } //minute digit at zero position 1..9 -\u003e 0. Increment the next one if (time_array[3] == (zero_bit_location) \u0026\u0026 (time_array_old[3] != time_array[3])){ (time_array[2] != (zero_bit_location)) ? (time_array[2] \u003c\u003c= 1) : (time_array[2] = one_bit_location); } // minute digit at 'overflow' location if (time_array[2] == (1\u003c\u003c5) \u0026\u0026 (time_array_old[2] != time_array[2]) ) { time_array[2] = zero_bit_location; (time_array[1] != (zero_bit_location)) ? (time_array[1] \u003c\u003c= 1) : (time_array[1] = one_bit_location); } if (time_array[1] == (zero_bit_location) \u0026\u0026 (time_array_old[1] != time_array[1])){ (time_array[0] != (0b0)) ? (time_array[0] \u003c\u003c= 1) : (time_array[0] = one_bit_location); } // minute digit at 'overflow' location // if (time_array[1] == (1 \u003c\u003c 10)){ // time_array[1] = one_bit_location; // } if (time_array[0] == (1\u003c\u003c2) \u0026\u0026 (time_array_old[0] != time_array[0])){ time_array[0] = 0b0; } uint32_t return_val = 0 | time_array[3] | (time_array[2] \u003c\u003c 10) | (time_array[1] \u003c\u003c 20) | (time_array[0] \u003c\u003c 30); return return_val; } uint32_t update_array_random(uint32_t time_array[], size_t size, bool multi_digit){ if (multi_digit){ time_array[3] = (1 \u003c\u003c random(0,9)) | (1 \u003c\u003c random(0,9)); time_array[2] = (1 \u003c\u003c random(0,9)) | (1 \u003c\u003c random(0,9)); time_array[1] = (1 \u003c\u003c random(0,9)) | (1 \u003c\u003c random(0,9)); time_array[0] = (1 \u003c\u003c random(0,2)) | (1 \u003c\u003c random(0,2)); } else { time_array[3] = (1 \u003c\u003c random(0,9)); time_array[2] = (1 \u003c\u003c random(0,9)); time_array[1] = (1 \u003c\u003c random(0,9)); time_array[0] = (1 \u003c\u003c random(0,2)); } uint32_t return_val = 0 | time_array[3] | (time_array[2] \u003c\u003c 10) | (time_array[1] \u003c\u003c 20) | (time_array[0] \u003c\u003c 30); return return_val; } uint32_t convert_array_to_digit(uint32_t time_array[]){ uint32_t return_val = 0 | time_array[3] | (time_array[2] \u003c\u003c 11) | (time_array[1] \u003c\u003c 21) | (time_array[0] \u003c\u003c 31); return return_val; } void readBit(String direction, long counter) { Serial.print(direction + \"Binary Number: \"); //loop through each bit for (int b = 32; b \u003e= 0; b--) { byte bit = bitRead(counter, b); Serial.print(bit); } Serial.print(\" Decimal Number: \"); Serial.println(counter); } uint32_t reverse_bits(uint32_t value) { uint32_t reversed = 0; // Store the result for (uint8_t i = 0; i \u003c 32; ++i) { // Extract the rightmost bit from value uint32_t bit = (value \u003e\u003e i) \u0026 1; // Set this bit in the reversed number at the correct position reversed |= (bit \u003c\u003c (32 - i - 1)); } return reversed; } void random_update_sequence(bool multi_digit){ value_to_SR = update_array_random(time_array, sizeof(time_array), multi_digit); write_to_sr_uint32(reverse_bits(value_to_SR)); set_latch_up(); // latch down is when the data is shifted! delayMicroseconds(10); set_latch_down(); //turn the shift register! } ",
+  "wordCount" : "947",
+  "inLanguage": "en-us",
+  "image": "http://localhost:1313/images/papermod-cover.png","datePublished": "2024-11-03T00:00:00Z",
+  "dateModified": "2024-11-03T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Kiet Vu"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/projects/project_nixie_clock/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kiet D. Vu",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Kiet D. Vu (Alt + H)">Kiet D. Vu</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about-me/" title="About Me">
+                    <span>About Me</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/publications/" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/contact" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      ★ Nixie Tube Display
+    </h1>
+    <div class="post-description">
+      Building a nixie number randomizer
+    </div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul><ul>
+                <li>
+                    <a href="#design-musings" aria-label="Design Musings">Design Musings</a></li></ul>
+                    
+                <li>
+                    <a href="#schematics-and-pcbs" aria-label="Schematics and PCBs">Schematics and PCBs</a></li>
+                <li>
+                    <a href="#prototype-testing" aria-label="Prototype Testing">Prototype Testing</a></li>
+                <li>
+                    <a href="#gallery" aria-label="Gallery">Gallery</a></li>
+                <li>
+                    <a href="#code-logic" aria-label="Code Logic">Code Logic</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><iframe width="800" height="480" src="https://www.youtube.com/embed/IyNu2J0NiTc?si=-T2R4KzOZgVSdeNV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h2 id="design-musings">Design Musings<a hidden class="anchor" aria-hidden="true" href="#design-musings">#</a></h2>
+<p>I have known about nixie tubes for a while, and it is great to finally make something with them myself! I went to Ebay and bought a couple of IN-12 tubes (there are larger variants such as IN-14 &amp; IN-18, I happen to like the design of this one due to its compactness). I was planning to make a clock, but ended up making something slightly different for this iteration.</p>
+<p>This project into two separated parts: The shift register/control circuit and the high voltage boost converter. For IN-12 tube, the supply requirement is ~165VDC, ~5mA per tube. The voltage supply is a normal DC wall plug (12V, 1A). I set up my converter to be able to deliver up to 25 mA of current, which is sufficient to power all the tubes.</p>
+<p>For shift register circuit, I use HV5622 which is a high voltage serial-to-parallel converter that can support up to 230V output. The shift register is controlled by an Arduino Nano (through a 5-12 V level shifter).</p>
+<p>This is also my first project trying to use EasyEDA &amp; JLCPCB assembly capability. I think it&rsquo;s usable and that the integrated library is certainly very convenient.</p>
+<p>You can find more information in the following sections, which include the schematics, code and test.</p>
+<h1 id="schematics-and-pcbs">Schematics and PCBs<a hidden class="anchor" aria-hidden="true" href="#schematics-and-pcbs">#</a></h1>
+<ul>
+<li>Nixie Supply Board Schematic &amp; Layout
+<embed src="/images/nixie/Schematic_Nixie-Driver-v1.pdf" type="application/pdf" width="100%" height="525px" />
+<embed src="/images/nixie/pwrboard_2d.png" width="100%"/>
+<embed src="/images/nixie/pwrboard_3d.png" width="100%"/>
+<br></br></li>
+<li>Nixie S/R Board Schematic &amp; Layout
+<embed src="/images/nixie/Schematic_Nixie-SR-v1.pdf" type="application/pdf" width="100%" height="525px" />
+<embed src="/images/nixie/sr_board_2d.png" width="100%" /></li>
+</ul>
+<h1 id="prototype-testing">Prototype Testing<a hidden class="anchor" aria-hidden="true" href="#prototype-testing">#</a></h1>
+<p>Number cycling test (integration test of shift register and power supply)</p>
+<iframe src="https://www.dropbox.com/scl/fi/nlr2nv6076aqqs3yn0a2e/NixiePrototype.MOV?rlkey=bidid1dwio8k0830phsx8nluj&st=6wumedts&raw=1" height="480px" width="640px" allowfullscreen></iframe>
+<h1 id="gallery">Gallery<a hidden class="anchor" aria-hidden="true" href="#gallery">#</a></h1>
+<embed src="/images/nixie/nixie-front.png" width="100%"/>
+<embed src="/images/nixie/nixie-side.png" width="100%"/>
+<embed src="/images/nixie/nixie-top.png" width="100%"/>
+<h1 id="code-logic">Code Logic<a hidden class="anchor" aria-hidden="true" href="#code-logic">#</a></h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define PIN_DATAIN_MASK (1 &lt;&lt; 6)  </span><span class="c1">// D7
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define PIN_CLOCK_MASK (1 &lt;&lt; 7) </span><span class="c1">// D6
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define PIN_LATCH_MASK (1 &lt;&lt; 5) </span><span class="c1">// D5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">Position: 
+</span></span></span><span class="line"><span class="cl"><span class="cm">Arrangement: -&gt; [1,2,3...9,0]
+</span></span></span><span class="line"><span class="cl"><span class="cm">HV1 - HV10: IN1: minute smol -&gt; [1,2,3...9,0]
+</span></span></span><span class="line"><span class="cl"><span class="cm">HV11 - HV20: IN2: minute big  -&gt; [1,2,3...9,0]
+</span></span></span><span class="line"><span class="cl"><span class="cm">HV21 - HV30: IN3: hours smol -&gt; [1,2,3...9,0]
+</span></span></span><span class="line"><span class="cl"><span class="cm">HV31 - HV32: IN4: hours large - &gt;[1,2]
+</span></span></span><span class="line"><span class="cl"><span class="cm">Strat: 
+</span></span></span><span class="line"><span class="cl"><span class="cm">Store each digit separatedly 
+</span></span></span><span class="line"><span class="cl"><span class="cm">every 60000 milliseconds: 
+</span></span></span><span class="line"><span class="cl"><span class="cm">bit shift HV 1 every cycle:
+</span></span></span><span class="line"><span class="cl"><span class="cm">bit shift HV 2 if HV 1 is zero 
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DDRD</span> <span class="o">=</span> <span class="n">DDRD</span> <span class="o">|</span> <span class="n">B11111100</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="nf">delay</span><span class="p">(</span><span class="mi">350</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">time_array</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="n">b01</span><span class="p">,</span> <span class="mi">0</span><span class="n">b0000001000</span><span class="p">,</span> <span class="mi">0</span><span class="n">b0000000001</span><span class="p">,</span> <span class="mi">0</span><span class="n">b0000000001</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">interval_min</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">interval_max</span> <span class="o">=</span> <span class="mi">180000</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">last</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">need_time_update</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">value_to_SR</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// put your main code here, to run repeatedly:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">now</span> <span class="o">=</span> <span class="nf">millis</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// Check if the interval has passed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="n">last</span> <span class="o">&gt;=</span> <span class="n">interval</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">60</span><span class="p">);</span> <span class="n">index</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">random_update_sequence</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">delay</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">randomSeed</span><span class="p">(</span><span class="nf">analogRead</span><span class="p">(</span><span class="n">A4</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">random_update_sequence</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">last</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">interval</span> <span class="o">=</span> <span class="nf">random</span><span class="p">(</span><span class="n">interval_min</span><span class="p">,</span> <span class="n">interval_max</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">write_to_sr_uint32</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// set value, clock up and down, then change value and repeat
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="n">shifted_val</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="mi">31</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PORTD</span> <span class="o">|=</span> <span class="n">PIN_CLOCK_MASK</span><span class="p">;</span> <span class="c1">//set clock high
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">bit_val</span> <span class="o">=</span> <span class="p">((</span><span class="n">shifted_val</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">bit_val</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">PORTD</span> <span class="o">|=</span> <span class="n">PIN_DATAIN_MASK</span><span class="p">;</span> <span class="c1">// set the datain line to HIGH
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">PORTD</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="o">~</span><span class="n">PIN_DATAIN_MASK</span><span class="p">);</span> <span class="c1">// set the datain line to LOW
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">PORTD</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="o">~</span><span class="n">PIN_CLOCK_MASK</span><span class="p">);</span> <span class="c1">//set clocl low. data stored.  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">shifted_val</span> <span class="o">=</span> <span class="n">shifted_val</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//shift for the next round 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">set_latch_up</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">PORTD</span> <span class="o">|=</span> <span class="n">PIN_LATCH_MASK</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">set_latch_down</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">PORTD</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="o">~</span><span class="n">PIN_LATCH_MASK</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="nf">update_time_value</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">time_array</span><span class="p">[],</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">time_array_old</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">time_array</span><span class="p">};</span> 
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">zero_bit_location</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="c1">// 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="n">one_bit_location</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b01</span><span class="p">;</span> <span class="c1">//location of digit 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// always shift this bit 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">one_bit_location</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">//minute digit at zero position 1..9 -&gt; 0. Increment the next one 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">zero_bit_location</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">time_array_old</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="n">zero_bit_location</span><span class="p">))</span> <span class="o">?</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">one_bit_location</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl"><span class="c1">// minute digit at &#39;overflow&#39; location 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">time_array_old</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">zero_bit_location</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="n">zero_bit_location</span><span class="p">))</span> <span class="o">?</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">one_bit_location</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">zero_bit_location</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">time_array_old</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">0</span><span class="n">b0</span><span class="p">))</span> <span class="o">?</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">one_bit_location</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl"><span class="c1">// minute digit at &#39;overflow&#39; location 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// if (time_array[1] == (1 &lt;&lt; 10)){
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//   time_array[1] = one_bit_location;  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// } 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">time_array_old</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b0</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">return_val</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">return_val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="nf">update_array_random</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">time_array</span><span class="p">[],</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">multi_digit</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">multi_digit</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">));</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">));</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">return_val</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">return_val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="nf">convert_array_to_digit</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">time_array</span><span class="p">[]){</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">return_val</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">time_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">11</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">21</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">time_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">31</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">return_val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="kt">void</span> <span class="nf">readBit</span><span class="p">(</span><span class="n">String</span> <span class="n">direction</span><span class="p">,</span> <span class="kt">long</span> <span class="n">counter</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">Serial</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="n">direction</span> <span class="o">+</span> <span class="s">&#34;Binary Number: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">//loop through each bit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span> <span class="n">b</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">byte</span> <span class="n">bit</span> <span class="o">=</span> <span class="nf">bitRead</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Serial</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="n">bit</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">Serial</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s">&#34; Decimal Number: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">Serial</span><span class="p">.</span><span class="nf">println</span><span class="p">(</span><span class="n">counter</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="nf">reverse_bits</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">reversed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// Store the result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Extract the rightmost bit from value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">uint32_t</span> <span class="n">bit</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Set this bit in the reversed number at the correct position
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">reversed</span> <span class="o">|=</span> <span class="p">(</span><span class="n">bit</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">32</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">reversed</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">random_update_sequence</span><span class="p">(</span><span class="kt">bool</span> <span class="n">multi_digit</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">value_to_SR</span> <span class="o">=</span> <span class="nf">update_array_random</span><span class="p">(</span><span class="n">time_array</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">time_array</span><span class="p">),</span> <span class="n">multi_digit</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">write_to_sr_uint32</span><span class="p">(</span><span class="nf">reverse_bits</span><span class="p">(</span><span class="n">value_to_SR</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">set_latch_up</span><span class="p">();</span> <span class="c1">// latch down is when the data is shifted!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">delayMicroseconds</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">set_latch_down</span><span class="p">();</span> <span class="c1">//turn the shift register!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© [Kiet D. Vu]</span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

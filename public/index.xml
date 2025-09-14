@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Kiet D. Vu</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Kiet D. Vu</description>
+    <image>
+      <title>Kiet D. Vu</title>
+      <url>http://localhost:1313/images/papermod-cover.png</url>
+      <link>http://localhost:1313/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.149.0</generator>
+    <language>en-us</language>
+    <copyright>[Kiet D. Vu]</copyright>
+    <lastBuildDate>Sun, 14 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>★ 50 - 150W Buck Converter Paper Design</title>
+      <link>http://localhost:1313/projects/project_buck_f/</link>
+      <pubDate>Thu, 15 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_buck_f/</guid>
+      <description>Power Electronics (MIT 6.334) Final Design Project</description>
+    </item>
+    <item>
+      <title>★ Magnetic Levitation Device (Thesis Work)</title>
+      <link>http://localhost:1313/projects/project_maglev_f/</link>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_maglev_f/</guid>
+      <description>MIT MechE Bachelor Thesis</description>
+    </item>
+    <item>
+      <title>★ High Speed ADC Board Prototype</title>
+      <link>http://localhost:1313/projects/project_adc_highspeed_f/</link>
+      <pubDate>Sun, 14 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_adc_highspeed_f/</guid>
+      <description>Thought process going into designing 65 MHz ADC Board Prototype</description>
+    </item>
+    <item>
+      <title>Injection-Molded Yoyo</title>
+      <link>http://localhost:1313/projects/project_injection_molded_f/</link>
+      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_injection_molded_f/</guid>
+      <description>Making injection-molded yoyo from scratch</description>
+    </item>
+    <item>
+      <title>Dimmable Blue LED from AA battery</title>
+      <link>http://localhost:1313/projects/project_boostled_f/</link>
+      <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_boostled_f/</guid>
+      <description>Driving blue LED from a 1.5V AA battery</description>
+    </item>
+    <item>
+      <title>Useless Box</title>
+      <link>http://localhost:1313/projects/project_clicky_box_f/</link>
+      <pubDate>Sat, 15 May 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_clicky_box_f/</guid>
+      <description>A useless, interactive box</description>
+    </item>
+    <item>
+      <title>DDR Pad</title>
+      <link>http://localhost:1313/projects/project_ddr_pad_f/</link>
+      <pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_ddr_pad_f/</guid>
+      <description>Making a light-weight DDR Pad</description>
+    </item>
+    <item>
+      <title>★ Op-amp based line following robot</title>
+      <link>http://localhost:1313/projects/project_linefollow_f/</link>
+      <pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_linefollow_f/</guid>
+      <description>what if we are not using a microcontroller?</description>
+    </item>
+    <item>
+      <title>★ Nixie Tube Display</title>
+      <link>http://localhost:1313/projects/project_nixie_clock_f/</link>
+      <pubDate>Sun, 03 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_nixie_clock_f/</guid>
+      <description>Building a nixie number randomizer</description>
+    </item>
+    <item>
+      <title>Kapitza&#39;s Pendulum</title>
+      <link>http://localhost:1313/projects/project_kapitsa_f/</link>
+      <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_kapitsa_f/</guid>
+      <description>Unusual, and fascinating way to balance an unstable system</description>
+    </item>
+    <item>
+      <title>★ Linear Motor</title>
+      <link>http://localhost:1313/projects/project_linear_motor_f/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/project_linear_motor_f/</guid>
+      <description>Linear Motor - MIT 6.A01 Freshman Seminar Project</description>
+    </item>
+    <item>
+      <title>About Me</title>
+      <link>http://localhost:1313/about-me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about-me/</guid>
+      <description>&lt;p&gt;I’m Kiet Vu, currently a Master’s student at MIT building an ultrasound kit gearing toward educational purpose. My interests are in electronics, controls &amp;amp; instrumentation, and design of electromechanical systems. My dream is to create new inventions, and toward that goal I am trying to learn and acquire new skills so I can expand my toolkits and be able to draw ideas from many different sources.
+&lt;br/&gt;&lt;br/&gt;
+I was also an undergraduate at MIT in the Mechanical Engineering department (Class of 2023). Before starting my master program, I worked for a year in the system engineering role at NASA GSFC as a contractor for the Roman Space Telescope project, performing and assisting with mechanical jitter and thermal distortion analysis.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Contact</title>
+      <link>http://localhost:1313/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/contact/</guid>
+      <description>&lt;p&gt;I can be contacted the following email: &lt;a href=&#34;mailto:kietv@mit.edu&#34;&gt;kietv@mit.edu&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Publications</title>
+      <link>http://localhost:1313/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s a collection of my works with MIT &amp;amp; NASA GSFC that have publications or some other forms of public presence.&lt;/p&gt;
+&lt;p&gt;==========================================================&lt;/p&gt;
+&lt;h2 id=&#34;nasaaerodyne&#34;&gt;NASA/Aerodyne&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;My work at NASA GSFC / Aerodyne is primarily with the Roman Space Telescope&amp;rsquo;s Integrated Modelling Team (RST IM), where I assist with mechanical jitter testing and analysis for RST, as well as developing internal tools support our analysis process. There are great cares that go into to making sure mechanical jitters and thermal distortion effects are well-managed and understood, all with the goal of ensuring sufficient optical performance for the space telescope. Here are some of the publicly available publications that give an overview into what this process looks like:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;systems-design-and-analysis-of-the-roman-space-telescope&#34;&gt;Systems Design and Analysis of the Roman Space Telescope&lt;/h4&gt;
+&lt;p&gt;K. -C. A. Liu et al., &amp;ldquo;Achieving Stability – Systems Design and Analysis of the Roman Space Telescope,&amp;rdquo; 2025 IEEE Aerospace Conference, Big Sky, MT, USA, 2025, pp. 1-17, doi: 10.1109/AERO63441.2025.11068696.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

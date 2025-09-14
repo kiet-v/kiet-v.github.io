@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>★ High Speed ADC Board Prototype | Kiet D. Vu</title>
+<meta name="keywords" content="">
+<meta name="description" content="Thought process going into designing 65 MHz ADC Board Prototype">
+<meta name="author" content="Kiet Vu">
+<link rel="canonical" href="http://localhost:1313/projects/project_adc_highspeed_f/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.402df69d910c9e59d7975ce917b0827809b79c4e2768bae3d49b5b14f77832bc.css" integrity="sha256-QC32nZEMnlnXl1zpF7CCeAm3nE4naLrj1JtbFPd4Mrw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en-us" href="http://localhost:1313/projects/project_adc_highspeed_f/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/projects/project_adc_highspeed_f/">
+  <meta property="og:site_name" content="Kiet D. Vu">
+  <meta property="og:title" content="★ High Speed ADC Board Prototype">
+  <meta property="og:description" content="Thought process going into designing 65 MHz ADC Board Prototype">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="projects">
+    <meta property="article:published_time" content="2025-09-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-14T00:00:00+00:00">
+      <meta property="og:image" content="http://localhost:1313/images/papermod-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/images/papermod-cover.png">
+<meta name="twitter:title" content="★ High Speed ADC Board Prototype">
+<meta name="twitter:description" content="Thought process going into designing 65 MHz ADC Board Prototype">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Projects",
+      "item": "http://localhost:1313/projects/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "★ High Speed ADC Board Prototype",
+      "item": "http://localhost:1313/projects/project_adc_highspeed_f/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "★ High Speed ADC Board Prototype",
+  "name": "★ High Speed ADC Board Prototype",
+  "description": "Thought process going into designing 65 MHz ADC Board Prototype",
+  "keywords": [
+    
+  ],
+  "articleBody": "\r(More Views, Schematics and Layouts in later sections)\rGoal As a part of my research, I’m currently building an ultrasound kit, which includes subsystems like receiver, pulser and power supply. A part of the challenge is to process the stream of data coming from the receiver using FPGA, and for that I need something that can simulate receiver data since my system is still in development. I decide to build a standalone ADC board that can output LVDS data similar to what ultrasound receiver usually outputs. This specific board would interact with Alchitry Au V2 FPGA board.\nThis would be useful board that allows me to simutaneously do development with the FPGA, while I’m rooting out the circuit design for other parts of the ultrasound system. This is also a good practice on laying out high-speed PCB board for me. By itself, it would also be a nice board for general measurement (and one step closer to building my own oscilloscope)! This is a first version of the board, and my plan is to gradually improve it over time.\nIC Selection I decided to use the AD9219 from ADI, which is a 65 MHz, 10 bits ADC. Its sampling rates, resolution and LVDS outputs are similar to what I need. Another reason is this IC is a part of a family of IC (AD9228…) that is pin-compatible. This board is built with such upgrade in mind - I should only need to replace the clock and the ADC with its pin compatible version. This IC also has an optional SPI line that allows me to program the IC with FPGA, but still works if I don’t use it (which is a nice risk reduction) The LVDS outputs are shown below. There’s a PLL inside the IC that takes in the input clock (CLK) and generate output clock (FCO) that scales by number of resolution bits (meaning if I have 40 MHz clock, I will get 40 x 10 MHz since my IC is 10 bits). Output data line is sampled on both rising and falling edge of the output clock signal. Front-End and ADC Driver I currently have two (out of four) input channels using the ADA4932 ADC driver, which has a -3dB bandwidth of up to 560 MHz. This helps me with noise immunity and also allow me to adjust the gain of the signal. I was planning to use RF transformer, but since my application is broadband, I decide to go with this route instead. If this works well, I will have all the channels ‘upgraded’ to be using this IC.\nIn future iterations, I will also try to redesign the front-end so that it can take higher input voltage.\nClock Selection: High speed ADC System requires a clean clock signal. The requirement becomes more stringent as you go to higher sampling frequency and resolution (see AN-501 application notes from ADI, the image below is taken from Figure 5): I select a clock (LMK6C from TI) which has 500fs maximum RMS jitter at 100MHz (12kHz to 20MHz integration BW). RF Transformer is used to convert single ended clock signal to differential, with a pair of high speed schottsky diode being placed to limit input voltage. Layout Notes: I use the following stack up: SIG1 - GND - PWR - SIG 2 (with ground pour). High speed traces are on the top layer Solid ground plane on second layer Lower speed traces are on the bottom layer The component placement is such that each distinct group of high-speed signal (input and ADC driver signals, clock, LVDS lines) does not overlap with each other and is sufficiently spaced apart 100 Ohm Impedance Control for LVDS lines on top layer I use the JLC04161H-7628 Stackup since it’s the cheapest Interpair and Intrapair lengths are matched to reduce skew Solid, continuous ground underneath these high-speed traces Keep these traces shorts and ‘distanced’ away from other traces. Clock trace is kept short and close to the IC FPGA placement is very close to minimize the length of LVDS signals Views and Layers Schematics and Stackup Schematic: Stack up: ",
+  "wordCount" : "685",
+  "inLanguage": "en-us",
+  "image": "http://localhost:1313/images/papermod-cover.png","datePublished": "2025-09-14T00:00:00Z",
+  "dateModified": "2025-09-14T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Kiet Vu"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/projects/project_adc_highspeed_f/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kiet D. Vu",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Kiet D. Vu (Alt + H)">Kiet D. Vu</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about-me/" title="About Me">
+                    <span>About Me</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/publications/" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/contact" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      ★ High Speed ADC Board Prototype
+    </h1>
+    <div class="post-description">
+      Thought process going into designing 65 MHz ADC Board Prototype
+    </div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#goal" aria-label="Goal">Goal</a></li>
+                <li>
+                    <a href="#ic-selection" aria-label="IC Selection">IC Selection</a></li>
+                <li>
+                    <a href="#front-end-and-adc-driver" aria-label="Front-End and ADC Driver">Front-End and ADC Driver</a></li>
+                <li>
+                    <a href="#clock-selection" aria-label="Clock Selection:">Clock Selection:</a></li>
+                <li>
+                    <a href="#layout-notes" aria-label="Layout Notes:">Layout Notes:</a></li>
+                <li>
+                    <a href="#views-and-layers" aria-label="Views and Layers">Views and Layers</a></li>
+                <li>
+                    <a href="#schematics-and-stackup" aria-label="Schematics and Stackup">Schematics and Stackup</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><embed src="/images/adc/3Dview.png" width="100%"/>
+(More Views, Schematics and Layouts in later sections)
+<h2 id="goal">Goal<a hidden class="anchor" aria-hidden="true" href="#goal">#</a></h2>
+<ul>
+<li>
+<p>As a part of my research, I&rsquo;m currently building an ultrasound kit, which includes subsystems like receiver, pulser and power supply. A part of the challenge is to process the stream of data coming from the receiver using FPGA, and for that I need something that can simulate receiver data since my system is still in development. I decide to build a standalone ADC board that can output LVDS data similar to what ultrasound receiver usually outputs. This specific board would interact with Alchitry Au V2 FPGA board.</p>
+</li>
+<li>
+<p>This would be useful board that allows me to simutaneously do development with the FPGA, while I&rsquo;m rooting out the circuit design for other parts of the ultrasound system. This is also a good practice on laying out high-speed PCB board for me. By itself, it would also be a nice board for general measurement (and one step closer to building my own oscilloscope)! This is a first version of the board, and my plan is to gradually improve it over time.</p>
+</li>
+</ul>
+<h2 id="ic-selection">IC Selection<a hidden class="anchor" aria-hidden="true" href="#ic-selection">#</a></h2>
+<ul>
+<li>I decided to use the AD9219 from ADI, which is a 65 MHz, 10 bits ADC. Its sampling rates, resolution and LVDS outputs are similar to what I need. Another reason is this IC is a part of a family of IC (AD9228&hellip;) that is pin-compatible. This board is built with such upgrade in mind - I should only need to replace the clock and the ADC with its pin compatible version. This IC also has an optional SPI line that allows me to program the IC with FPGA, but still works if I don&rsquo;t use it (which is a nice risk reduction)</li>
+<li>The LVDS outputs are shown below. There&rsquo;s a PLL inside the IC that takes in the input clock (CLK) and generate output clock (FCO) that scales by number of resolution bits (meaning if I have 40 MHz clock, I will get 40 x 10 MHz since my IC is 10 bits). Output data line is sampled on both rising and falling edge of the output clock signal.
+<embed src="/images/adc/LVDSProtocol.png" width="100%"/></li>
+</ul>
+<h2 id="front-end-and-adc-driver">Front-End and ADC Driver<a hidden class="anchor" aria-hidden="true" href="#front-end-and-adc-driver">#</a></h2>
+<ul>
+<li>
+<p>I currently have two (out of four) input channels using the ADA4932 ADC driver, which has a -3dB bandwidth of up to 560 MHz. This helps me with noise immunity and also allow me to adjust the gain of the signal. I was planning to use RF transformer, but since my application is broadband, I decide to go with this route instead. If this works well, I will have all the channels &lsquo;upgraded&rsquo; to be using this IC.</p>
+</li>
+<li>
+<p>In future iterations, I will also try to redesign the front-end so that it can take higher input voltage.</p>
+</li>
+</ul>
+<h2 id="clock-selection">Clock Selection:<a hidden class="anchor" aria-hidden="true" href="#clock-selection">#</a></h2>
+<ul>
+<li>High speed ADC System requires a clean clock signal. The requirement becomes more stringent as you go to higher sampling frequency and resolution (see AN-501 application notes from ADI, the image below is taken from Figure 5):
+<embed src="/images/adc/SNRJitter.png" width="100%"/></li>
+<li>I select a clock (LMK6C from TI) which has 500fs maximum RMS jitter at 100MHz (12kHz to 20MHz integration BW).</li>
+<li>RF Transformer is used to convert single ended clock signal to differential, with a pair of high speed schottsky diode being placed to limit input voltage.</li>
+</ul>
+<h2 id="layout-notes">Layout Notes:<a hidden class="anchor" aria-hidden="true" href="#layout-notes">#</a></h2>
+<ul>
+<li>I use the following stack up: SIG1 - GND - PWR - SIG 2 (with ground pour).
+<ul>
+<li>High speed traces are on the top layer</li>
+<li>Solid ground plane on second layer</li>
+<li>Lower speed traces are on the bottom layer</li>
+</ul>
+</li>
+<li>The component placement is such that each distinct group of high-speed signal (input and ADC driver signals, clock, LVDS lines) does not overlap with each other and is sufficiently spaced apart</li>
+<li>100 Ohm Impedance Control for LVDS lines on top layer
+<ul>
+<li>I use the JLC04161H-7628 Stackup since it&rsquo;s the cheapest</li>
+<li>Interpair and Intrapair lengths are matched to reduce skew</li>
+<li>Solid, continuous ground underneath these high-speed traces</li>
+<li>Keep these traces shorts and &lsquo;distanced&rsquo; away from other traces.</li>
+</ul>
+</li>
+<li>Clock trace is kept short and close to the IC</li>
+<li>FPGA placement is very close to minimize the length of LVDS signals</li>
+</ul>
+<h2 id="views-and-layers">Views and Layers<a hidden class="anchor" aria-hidden="true" href="#views-and-layers">#</a></h2>
+<embed src="/images/adc/2Dview.png" width="100%"/>
+<embed src="/images/adc/3Dview.png" width="100%"/>
+<embed src="/images/adc/sig1.png" width="100%"/>
+<embed src="/images/adc/gnd.png" width="100%"/>
+<embed src="/images/adc/pwr.png" width="100%"/>
+<embed src="/images/adc/sig2.png" width="100%"/>
+<h2 id="schematics-and-stackup">Schematics and Stackup<a hidden class="anchor" aria-hidden="true" href="#schematics-and-stackup">#</a></h2>
+<ul>
+<li>Schematic:
+<embed src="/images/adc/ADC_LVDS_Testboard.pdf" type="application/pdf" width="100%" height="600px" />
+<br></br></li>
+<li>Stack up:
+<embed src="/images/adc/Stackup.pdf" type="application/pdf" width="100%" height="600px" /></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© [Kiet D. Vu]</span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

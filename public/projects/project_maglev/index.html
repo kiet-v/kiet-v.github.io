@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>★ Magnetic Levitation Device | Kiet D. Vu</title>
+<meta name="keywords" content="">
+<meta name="description" content="MIT MechE Bachelor Thesis">
+<meta name="author" content="Kiet Vu">
+<link rel="canonical" href="http://localhost:1313/projects/project_maglev/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.402df69d910c9e59d7975ce917b0827809b79c4e2768bae3d49b5b14f77832bc.css" integrity="sha256-QC32nZEMnlnXl1zpF7CCeAm3nE4naLrj1JtbFPd4Mrw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en-us" href="http://localhost:1313/projects/project_maglev/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/projects/project_maglev/">
+  <meta property="og:site_name" content="Kiet D. Vu">
+  <meta property="og:title" content="★ Magnetic Levitation Device">
+  <meta property="og:description" content="MIT MechE Bachelor Thesis">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="projects">
+    <meta property="article:published_time" content="2023-06-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-06-01T00:00:00+00:00">
+      <meta property="og:image" content="http://localhost:1313/images/papermod-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/images/papermod-cover.png">
+<meta name="twitter:title" content="★ Magnetic Levitation Device">
+<meta name="twitter:description" content="MIT MechE Bachelor Thesis">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Projects",
+      "item": "http://localhost:1313/projects/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "★ Magnetic Levitation Device",
+      "item": "http://localhost:1313/projects/project_maglev/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "★ Magnetic Levitation Device",
+  "name": "★ Magnetic Levitation Device",
+  "description": "MIT MechE Bachelor Thesis",
+  "keywords": [
+    
+  ],
+  "articleBody": "\rThroughout my undergraduate, I did a variety of experimentation with control-related projects. It is fitting that my bachelor thesis project has something to do with magnet and levitation. For this project, I went through a complete process of deconstructing an existing device, try to understand and explain the device physics and operation, and design my own controller and drive system.\nOverall, I was pleased that I am able to implement my own levitation design and got it to work before I graduate, and learn new things along the way!\n(You can read the complete thesis document at the end of the page if interested! The document can also be found on MIT DSpace)\nDevice Operation Magnetic levitation from the bottom (which is what this device does) is typically more tricky than levitation from the top that’s typically seen in control class. One such reason is due to the magnetic field generated by active coil typically aligns with the levitated magnet, thus the tilt stability is usually well-behaved for this configuration. Levitation from the bottom is more tricky, due to a “repulsion” nature of the problem.\nOne of the great achievements for me during this thesis work is being able to figure out the principle and come up with a simple but pretty effective explanatory model (a dipole on top of two opposite current loops) to explain the device operation. This model, coupled with Earnshaw’s theorem, helps explain which DOFs are passively stabilized, and which ones are actively controlled by coil(s). For this particular device, it requires active control for planar motions, while the vertical DOF and rotational DOFs are being passively stabled.\nIn order to gain insights, there are a lot of efforts that go into testing and disassembling the device (which includes retracing the commercial PCB). Those details are included in the thesis for curious readers.\nAnalysis \u0026 Controller Consideration This system (smaller hovering on top of a ring magnet) behaves similarly a mass with negative spring, which is inherently unstable. Under the frequency response perspective, the plant behaves similar to second order spring mass system with -40dB/dec magnitude roll off beypnd characteristics frequency, but with no resonant peak. The phase for this plant is -180 for across frequency (so there’s no phase margin to begin with).\nSuch plant requires a lead (derivative) controller to create positive phase margin, and the controller crossover frequency has to be sufficiently higher than the plant’s characteristic frequency. This also does match with physical intuition, as the stronger the (destabilizing) forces from the ring magnet, the faster that is required from the controller for the system to be stable.\nThis project implements analog control. In hindsight I might have saved more time going digital route, but I think this adds ‘charm’ to the project so no regret! Though if I’m to build the next iterations (which I do want to), I will use a microcontroller so I can also implement more interesting features.\nThesis Document The complete document can be found here: ",
+  "wordCount" : "499",
+  "inLanguage": "en-us",
+  "image": "http://localhost:1313/images/papermod-cover.png","datePublished": "2023-06-01T00:00:00Z",
+  "dateModified": "2023-06-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Kiet Vu"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/projects/project_maglev/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kiet D. Vu",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Kiet D. Vu (Alt + H)">Kiet D. Vu</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about-me/" title="About Me">
+                    <span>About Me</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/publications/" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/contact" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      ★ Magnetic Levitation Device
+    </h1>
+    <div class="post-description">
+      MIT MechE Bachelor Thesis
+    </div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#device-operation" aria-label="Device Operation">Device Operation</a></li>
+                <li>
+                    <a href="#analysis--controller-consideration" aria-label="Analysis &amp; Controller Consideration">Analysis &amp; Controller Consideration</a></li>
+                <li>
+                    <a href="#thesis-document" aria-label="Thesis Document">Thesis Document</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><iframe width="640" height="480" src="https://www.youtube.com/embed/8IeWGwKft4I?si=qVCheoQ2kFlHrByn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p>Throughout my undergraduate, I did a variety of experimentation with control-related projects. It is fitting that my bachelor thesis project has something to do with magnet and levitation. For this project, I went through a complete process of deconstructing an existing device, try to understand and explain the device physics and operation, and design my own controller and drive system.</p>
+<p>Overall, I was pleased that I am able to implement my own levitation design and got it to work before I graduate, and learn new things along the way!</p>
+<p>(You can read the complete thesis document at the end of the page if interested! The document can also be found on <a href="https://dspace.mit.edu/handle/1721.1/151947">MIT DSpace</a>)</p>
+<h2 id="device-operation">Device Operation<a hidden class="anchor" aria-hidden="true" href="#device-operation">#</a></h2>
+<p>Magnetic levitation from the bottom (which is what this device does) is typically more tricky than levitation from the top that&rsquo;s typically seen in control class. One such reason is due to the magnetic field generated by active coil typically aligns with the levitated magnet, thus the tilt stability is usually well-behaved for this configuration. Levitation from the bottom is more tricky, due to a &ldquo;repulsion&rdquo; nature of the problem.</p>
+<p>One of the great achievements for me during this thesis work is being able to figure out the principle and come up with a simple but pretty effective explanatory model (a dipole on top of two opposite current loops) to explain the device operation. This model, coupled with Earnshaw&rsquo;s theorem, helps explain which DOFs are passively stabilized, and which ones are actively controlled by coil(s). For this particular device, it requires active control for planar motions, while the vertical DOF and rotational DOFs are being passively stabled.</p>
+<p>In order to gain insights, there are a lot of efforts that go into testing and disassembling the device (which includes retracing the commercial PCB). Those details are included in the thesis for curious readers.</p>
+<h2 id="analysis--controller-consideration">Analysis &amp; Controller Consideration<a hidden class="anchor" aria-hidden="true" href="#analysis--controller-consideration">#</a></h2>
+<p>This system (smaller hovering on top of a ring magnet) behaves similarly a mass with negative spring, which is inherently unstable. Under the frequency response perspective, the plant behaves similar to second order spring mass system with -40dB/dec magnitude roll off beypnd characteristics frequency, but with no resonant peak. The phase for this plant is -180 for across frequency (so there&rsquo;s no phase margin to begin with).</p>
+<p>Such plant requires a lead (derivative) controller to create positive phase margin, and the controller crossover frequency has to be sufficiently higher than the plant&rsquo;s characteristic frequency. This also does match with physical intuition, as the stronger the (destabilizing) forces from the ring magnet, the faster that is required from the controller for the system to be stable.</p>
+<p>This project implements analog control. In hindsight I might have saved more time going digital route, but I think this adds &lsquo;charm&rsquo; to the project so no regret! Though if I&rsquo;m to build the next iterations (which I do want to), I will use a microcontroller so I can also implement more interesting features.</p>
+<h2 id="thesis-document">Thesis Document<a hidden class="anchor" aria-hidden="true" href="#thesis-document">#</a></h2>
+<p>The complete document can be found here:
+<embed src="/pdfs/vu-kietv-sb-meche-2023-thesis.pdf" type="application/pdf" width="100%" height="600px" /></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© [Kiet D. Vu]</span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+---
+author: "Kiet Vu"
+title: "Nixie Scrambler Clock"
+date: "2025-05-01"
+description: "Personal Project In"
+FRtags: ["markdown", "css", "html", "themes"]
+FRcategories: ["themes", "syntax"]
+FRseries: ["Themes Guide"]
+aliases: ["migrate-from-jekyl"]
+ShowToc: true
+TocOpen: true
+weight: 5
+---
