@@ -35,7 +35,7 @@ languages:
           url: /about-me/
           weight: 1
         - name: Projects
-          url: /projects/
+          url: /posts/projects/
           weight: 2
         - name: Publications
           url: /publications/
