@@ -30,7 +30,7 @@ You can find more information in the following sections, which include the schem
 <embed src="/images/nixie/pwrboard_2d.png" width="100%"/>
 <embed src="/images/nixie/pwrboard_3d.png" width="100%"/>
 - Nixie S/R Board Schematic
-<embed src="/images/nixie/Schematic_Nixie-SR-v1.pdf" type="application/pdf" width="100%" height="500px" />
+<embed src="/images/nixie/Schematic_Nixie-SR-V1.pdf" type="application/pdf" width="100%" height="500px" />
 <embed src="/images/nixie/sr_board_2d.png" width="100%" />
 
 # Prototype Testing
