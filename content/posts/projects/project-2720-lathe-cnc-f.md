@@ -14,6 +14,8 @@ sitemap:
   disable: true
 ---
 
+For MIT 2.720 Machine Design,  I worked with a team of 5 to build a CNC lathe. This page documents my contributions to the overall effort!
+
 <div style="margin:18px 0;text-align:center"><a href="/images/272lathe/results/lathe.webp" style="box-shadow:none;display:inline-block;max-width:100%"><img src="/images/272lathe/results/lathe.webp" alt="Our tabletop 2-axis CNC lathe" loading="eager" style="display:block;margin:0 auto;max-width:100%;max-height:520px;width:auto;height:auto;border-radius:4px"></a></div>
 
 ## Modelling
