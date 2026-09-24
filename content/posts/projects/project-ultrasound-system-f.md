@@ -94,6 +94,8 @@ weight: 1
 ### Schematics and Stackup
 - Schematic:
 <embed src="/images/adc/ADC_LVDS_Testboard.pdf" type="application/pdf" width="100%" height="600px" />
+[Open the schematic as a PDF](/images/adc/ADC_LVDS_Testboard.pdf)
 <br></br>
 - Stack up:
 <embed src="/images/adc/Stackup.pdf" type="application/pdf" width="100%" height="600px" />
+[Open the stackup as a PDF](/images/adc/Stackup.pdf)
