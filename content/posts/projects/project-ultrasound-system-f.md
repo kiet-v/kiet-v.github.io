@@ -13,6 +13,18 @@ weight: 1
 ---
 
 ## Power Board
+
+The power board is designed to power the transceiver board, which requires several different voltage levels. These include the following:
+
+| Rail | Topology | Usage |
+|---|---|---|
+| ±85 V (adjustable, isolated) | Isolated flyback converter | The pulser's high-voltage supply, which fires the transducers |
+| +15 V / −15 V | Buck and inverting buck converters | The time-gain compensation (TGC) circuit, regulated down to ±13 V for its op-amps |
+| +6 V | Buck converter | Input to the transceiver's low-noise regulators, which make the front-end, pulser-logic, clock and Teensy rails |
+| −8.6 V | Dual-polarity charge pump | Input to the −5 V regulator for the pulser's negative low-voltage rail |
+
+Everything comes from one 24 V input with a protection circuit, and the flyback stays off by default until its enable jumper is set.
+
 <div style="margin:18px 0;text-align:center"><a href="/images/ultrasound/pwr/photo.webp" style="box-shadow:none;display:inline-block;max-width:100%"><img src="/images/ultrasound/pwr/photo.webp" alt="Ultrasound power board" loading="lazy" style="display:block;margin:0 auto;max-width:100%;max-height:520px;width:auto;height:auto;border-radius:4px"></a></div>
 
 
@@ -32,7 +44,7 @@ weight: 1
 
 [Open the schematic as a PDF](/images/ultrasound/pwr/schematic.pdf)
 
-## Transceiver Board
+## Transceiver Board (WIP)
 
 ### Layout
 <div style="margin:18px 0;text-align:center"><a href="/images/ultrasound/xcvr/overview.webp" style="box-shadow:none;display:inline-block;max-width:100%"><img src="/images/ultrasound/xcvr/overview.webp" alt="Transceiver board, all layers" loading="lazy" style="display:block;margin:0 auto;max-width:100%;max-height:520px;width:auto;height:auto;border-radius:4px"></a><div style="font-size:0.9em;opacity:0.75;margin-top:4px">Transceiver board, all layers</div></div>
